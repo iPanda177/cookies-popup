@@ -1,0 +1,89 @@
+<div 
+  class="cookies" 
+  style="background-color: {{ block.settings.background }}" 
+  id="cookies">
+  {{ 'cookies.png' | asset_url | img_tag: 'logo', 'cookies__img' }}
+
+  <div class="cookies__info">
+    {{ block.settings.policy_text }}
+  </div>
+
+  <button 
+    onclick="hidePopup();"
+    class="cookies__accept" 
+    style="background-color: {{ block.settings.primary-btn-background }}; color: {{ block.settings.primary-btn-text-color }}"
+  >
+    {{ 'cookie-button.svg' | asset_url | img_tag: 'accept' }}
+    {{ block.settings.primary-btn-text }}
+  </button>
+
+  <button 
+    onclick="hidePopup();"
+    class="cookies__decline"
+    style="background-color: {{ block.settings.secondary-btn-background }}; color: {{ block.settings.secondary-btn-text-color }}"
+  >
+    {{ block.settings.secondary-btn-text }}
+  </button>
+
+  <div onclick="hidePopup();">
+    {{ 'cross.svg' | asset_url | img_tag: 'cross', 'cookies__cross' }}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "App Embed",
+  "target": "body",
+  "stylesheet": "cookies-popup.css",
+  "javascript": "cookies-popup.js",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "policy_text",
+      "label": "policy text"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "primary-btn-text",
+      "label": "primary-btn-text",
+      "default": "Accept cookies"
+    },
+    {
+      "type": "color",
+      "id": "primary-btn-background",
+      "label": "primary-btn-background",
+      "default": "#FFC611"
+    },
+    {
+      "type": "color",
+      "id": "primary-btn-text-color",
+      "label": "primary-btn-text-color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "secondary-btn-text",
+      "label": "secondary-btn-text",
+      "default": "Decline"
+    },
+    {
+      "type": "color",
+      "id": "secondary-btn-background",
+      "label": "secondary-btn-background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "secondary-btn-text-color",
+      "label": "secondary-btn-text-color",
+      "default": "#000000"
+    }
+  ]
+}
+{% endschema %}
+

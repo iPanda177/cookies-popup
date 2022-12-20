@@ -1,33 +1,35 @@
-<div 
-  class="cookies" 
-  style="background-color: {{ block.settings.background }}" 
-  id="cookies">
-  {{ 'cookies.png' | asset_url | img_tag: 'logo', 'cookies__img' }}
-
-  <div class="cookies__info">
-    {{ block.settings.policy_text }}
-  </div>
-
-  <button 
-    onclick="hidePopup();"
-    class="cookies__accept" 
-    style="background-color: {{ block.settings.primary-btn-background }}; color: {{ block.settings.primary-btn-text-color }}"
-  >
-    {{ 'cookie-button.svg' | asset_url | img_tag: 'accept' }}
-    {{ block.settings.primary-btn-text }}
-  </button>
-
-  <button 
-    onclick="hidePopup();"
-    class="cookies__decline"
-    style="background-color: {{ block.settings.secondary-btn-background }}; color: {{ block.settings.secondary-btn-text-color }}"
-  >
-    {{ block.settings.secondary-btn-text }}
-  </button>
-
-  <div onclick="hidePopup();">
-    {{ 'cross.svg' | asset_url | img_tag: 'cross', 'cookies__cross' }}
-  </div>
+<div id="cookies-container">
+  {% comment %} <div 
+    class="cookies" 
+    style="background-color: {{ block.settings.background }}" 
+    id="cookies">
+    {{ 'cookies.png' | asset_url | img_tag: 'logo', 'cookies__img' }}
+  
+    <div class="cookies__info">
+      {{ block.settings.policy_text }}
+    </div>
+  
+    <button 
+      onclick="hidePopup();"
+      class="cookies__accept" 
+      style="background-color: {{ block.settings.primary-btn-background }}; color: {{ block.settings.primary-btn-text-color }}"
+    >
+      {{ 'cookie-button.svg' | asset_url | img_tag: 'accept' }}
+      {{ block.settings.primary-btn-text }}
+    </button>
+  
+    <button 
+      onclick="hidePopup();"
+      class="cookies__decline"
+      style="background-color: {{ block.settings.secondary-btn-background }}; color: {{ block.settings.secondary-btn-text-color }}"
+    >
+      {{ block.settings.secondary-btn-text }}
+    </button>
+  
+    <div onclick="hidePopup();">
+      {{ 'cross.svg' | asset_url | img_tag: 'cross', 'cookies__cross' }}
+    </div>
+  </div> {% endcomment %}
 </div>
 {% schema %}
 {
@@ -45,7 +47,7 @@
       "type": "color",
       "id": "background",
       "label": "Background",
-      "default": "#ffffff"
+      "default": "#FFFFFF"
     },
     {
       "type": "text",

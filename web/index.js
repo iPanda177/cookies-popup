@@ -8,6 +8,10 @@ import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import GDPRWebhookHandlers from "./gdpr.js";
 
+// import lookup from 'geoip-lite';
+
+// const router = express.Router();
+
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
 
 const STATIC_PATH =
@@ -63,5 +67,13 @@ app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res, _next) => {
     .set("Content-Type", "text/html")
     .send(readFileSync(join(STATIC_PATH, "index.html")));
 });
+
+// router.get('/', (req, res) => {
+//   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+//   console.log(ip);
+//   console.log(lookup(ip));
+// });
+
+// app.use('/', router);
 
 app.listen(PORT);

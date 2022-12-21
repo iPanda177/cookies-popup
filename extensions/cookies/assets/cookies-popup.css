@@ -11,7 +11,7 @@
   font-family: 'DM Sans', sans-serif;
 
   position: fixed;
-  bottom: 10px; 
+  bottom: -600px; 
   left: 0;
   right: 0;
   margin: 0 auto; 
@@ -24,12 +24,8 @@
 
   z-index: 1000;
 
-  animation: move 1s linear 1;
+  /* animation: move 1s linear 1; */
   transition: bottom 1s linear;
-}
-
-.cookies:focus {
-  animation: hide 1s linear 1;
 }
 
 @keyframes move {
@@ -39,16 +35,6 @@
 
   to {
     bottom: 10px;
-  }
-}
-
-@keyframes hide {
-  from {
-    bottom: 10px;
-  }
-
-  to {
-    bottom: -200px;
   }
 }
 
@@ -75,6 +61,8 @@
   color: #ffff80;
   border-radius: 56px;
   border: 0;
+
+  margin-right: 10px;
 
   cursor: pointer;
 

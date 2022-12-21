@@ -4,17 +4,13 @@
     style="background-color: {{ block.settings.background }}" 
     id="cookies">
     {{ 'cookies.png' | asset_url | img_tag: 'logo', 'cookies__img' }}
-
-    <button class="cookies__location" id="find-me">Show location</button>
-    <p id="status"></p>
-    <a id="map-link" target="_blank"></a>
   
     <div class="cookies__info">
       {{ block.settings.policy_text }}
     </div>
   
     <button 
-      onclick="hidePopup();"
+      onclick="setCookies();"
       class="cookies__accept" 
       style="background-color: {{ block.settings.primary-btn-background }}; color: {{ block.settings.primary-btn-text-color }}"
     >

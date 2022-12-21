@@ -1,5 +1,6 @@
-import {SettingToggle} from '@shopify/polaris';
-import {useState, useCallback} from 'react';
+import {SettingToggle, Card} from '@shopify/polaris';
+import {useState, useCallback, useEffect} from 'react';
+import ChoiceGeoCountries from '../choice-geo-countries/choice-geo-countries';
 
 export default function Geolocation() {
   const [active, setActive] = useState(false);
@@ -10,15 +11,25 @@ export default function Geolocation() {
   const textStatus = active ? 'activated' : 'deactivated';
 
   return (
-    <SettingToggle
-      action={{
+    <>
+      <SettingToggle
+        action={{
         content: contentStatus,
         onAction: handleToggle,
-      }}
-      enabled={active}
-    >
+        }}
+        enabled={active}
+      >
       Checking geolocation: {textStatus}
       .
-    </SettingToggle>
+      </SettingToggle>
+
+      {active && 
+      <Card sectioned>
+        <ChoiceGeoCountries></ChoiceGeoCountries>
+      </Card>}
+    </>
+    
+
+
   );
 }

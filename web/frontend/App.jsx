@@ -11,7 +11,7 @@ import '@shopify/polaris/build/esm/styles.css';
 import enTranslations from '@shopify/polaris/locales/en.json';
 import { AppProvider, Page } from "@shopify/polaris";
 import Geolocation from './components/geolocation/geolocation';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
   // Any .tsx or .jsx files in /pages will become a route
@@ -36,7 +36,6 @@ export default function App() {
     discardConfirmationModal: true,
     onAction: () => console.log('On discard action')
   }
-
 
   return (
     <Provider config={appBridgeConfig}>

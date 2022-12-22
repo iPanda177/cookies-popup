@@ -14,7 +14,8 @@
   "dependencies": {
     "@shopify/app": "3.28.0",
     "@shopify/cli": "3.28.0",
-    "geoip-lite": "^1.4.6"
+    "geoip-lite": "^1.4.6",
+    "mongodb": "^4.13.0"
   },
   "author": "Demig"
 }

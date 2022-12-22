@@ -1,20 +1,45 @@
 import {Stack, Tag, Autocomplete} from '@shopify/polaris';
-import {useState, useCallback, useMemo} from 'react';
+import {useState, useCallback, useMemo, useEffect} from 'react';
 
 export default function CountryList() {
-  const deselectedOptions = useMemo(
-    () => [
-      {value: 'rustic', label: 'Rustic'},
-      {value: 'antique', label: 'Antique'},
-      {value: 'vinyl', label: 'Vinyl'},
-      {value: 'vintage', label: 'Vintage'},
-      {value: 'refurbished', label: 'Refurbished'},
-    ],
-    [],
-  );
-  const [selectedOptions, setSelectedOptions] = useState(['rustic']);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [options, setOptions] = useState(deselectedOptions);
+  const [options, setOptions] = useState([]);
+
+  const getCountries = async () => {
+    let list = await fetch('https://restcountries.com/v3.1/all')
+      .then((response) => {
+      return response.json();
+    })
+      .then((data) => {
+        let countries = [];
+
+        for (const country of data) {
+          countries.push({
+            value: country.name.common,
+            label: country.flag + ' ' + country.name.common,
+          })
+        }
+
+        return countries;
+    });
+
+    return list;
+  }
+
+  let deselectedOptions = useMemo(
+      () => [],
+      [],
+    );
+
+  useEffect(() => {
+    getCountries()
+      .then(data => {
+        deselectedOptions = data;
+        setOptions(deselectedOptions)
+      })
+      .catch(error => alert(error))
+  }, [deselectedOptions])
 
   const updateText = useCallback(
     (value) => {
@@ -68,7 +93,7 @@ export default function CountryList() {
       onChange={updateText}
       label="Tags"
       value={inputValue}
-      placeholder="Vintage, cotton, summer"
+      placeholder="Ukraine, Germany, Italy"
       verticalContent={verticalContentMarkup}
     />
   );
@@ -81,7 +106,7 @@ export default function CountryList() {
         selected={selectedOptions}
         textField={textField}
         onSelect={setSelectedOptions}
-        listTitle="Suggested Tags"
+        listTitle="Suggested Countries"
       />
     </div>
   );

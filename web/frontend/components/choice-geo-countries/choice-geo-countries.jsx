@@ -8,14 +8,6 @@ export default function ChoiceGeoCountries() {
 
   const handleChange = useCallback((value) => setSelected(value), []);
 
-    if (selected.includes('all')) {
-      window.localStorage.setItem('GEOLOCATION_OPTION', JSON.stringify('all'));
-    }
-
-    if (selected.includes('optional')) {
-      window.localStorage.setItem('GEOLOCATION_OPTION', JSON.stringify([]))
-    }
-
   return (
     <>
       <ChoiceList

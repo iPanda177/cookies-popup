@@ -10,6 +10,7 @@ import GDPRWebhookHandlers from "./gdpr.js";
 
 import mongo from "mongodb";
 import createMetafield from "./country-metafield.js";
+import data from "./db.json" assert { type: "json" };
 
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
 
@@ -57,6 +58,10 @@ app.get("/api/products/create", async (_req, res) => {
   }
   res.status(status).send({ success: status === 200, error });
 });
+
+app.get("/api/settings", (_req, res) => {
+  res.status(200).send(JSON.stringify(data))
+})
 
 app.get("/api/metafields/create", async (_req, res) => {
   let status = 201;

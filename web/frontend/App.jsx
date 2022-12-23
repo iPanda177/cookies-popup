@@ -1,6 +1,6 @@
-import { BrowserRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NavigationMenu, Provider, ContextualSaveBar } from "@shopify/app-bridge-react";
-import Routes from "./Routes";
 
 import {
   AppBridgeProvider,
@@ -9,14 +9,16 @@ import {
 } from "./components";
 import '@shopify/polaris/build/esm/styles.css';
 import enTranslations from '@shopify/polaris/locales/en.json';
-import { AppProvider, Page } from "@shopify/polaris";
-import Geolocation from './components/geolocation/geolocation';
-import { useEffect, useState } from "react";
+import { AppProvider, Page, Pagination } from "@shopify/polaris";
+import Main from "./pages/geo";
+import Privacy from './pages/privacy';
+
 
 export default function App() {
   // Any .tsx or .jsx files in /pages will become a route
   // See documentation for <Routes /> for more info
   const pages = import.meta.globEager("./pages/**/!(*.test.[jt]sx)*.([jt]sx)");
+
 
   const appBridgeConfig = {
     apiKey: '498c10eeb8ddcb4e18fd9e3e6e6d3827',
@@ -24,34 +26,34 @@ export default function App() {
     forceRedirect: true,
   }
 
-  const saveAction = {
-    disabled: false,
-    loading: false,
-    onAction: () => console.log('On save action')
-  }
-
-  const discardAction = {
-    disabled: false,
-    loading: false,
-    discardConfirmationModal: true,
-    onAction: () => console.log('On discard action')
-  }
-
   return (
-    <Provider config={appBridgeConfig}>
-      <ContextualSaveBar
-        saveAction={saveAction}
-        discardAction={discardAction}
-        fullWidth
-        leaveConfirmationDisable
-        visible
-      />
-
-      <AppProvider i18n={enTranslations}>
-        <Page title="Geolocation settings">
-          <Geolocation></Geolocation>
-        </Page>
-      </AppProvider>
-    </Provider>
+    <PolarisProvider>
+      <BrowserRouter>
+        <AppBridgeProvider>
+          <QueryProvider>
+            <Provider config={appBridgeConfig}>
+                <NavigationMenu 
+                  navigationLinks={[
+                    {
+                      label: 'Geolocation settings',
+                      destination: '/geo',
+                    },
+                    {
+                      label: 'Privacy policy',
+                      destination: '/privacy',
+                    },
+                  ]}/>
+                <AppProvider i18n={enTranslations}>
+                  <Routes>
+                    <Route path="/geo" element={<Main />}/>
+                    <Route path="/privacy" element={<Privacy />}/>
+                  </Routes>
+                </AppProvider>
+              </Provider>
+            </QueryProvider>
+        </AppBridgeProvider>
+      </BrowserRouter>
+    </PolarisProvider>
+    
   );
 }

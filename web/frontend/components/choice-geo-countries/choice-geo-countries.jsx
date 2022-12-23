@@ -3,10 +3,12 @@ import {useState, useCallback, useEffect} from 'react';
 
 import CountryList from '../country-list/country-list';
 
-export default function ChoiceGeoCountries() {
+export default function ChoiceGeoCountries({countries, setCountries}) {
   const [selected, setSelected] = useState(['hidden']);
 
-  const handleChange = useCallback((value) => setSelected(value), []);
+  const handleChange = (value) => {
+    setSelected(value)
+  }
 
   return (
     <>
@@ -23,7 +25,7 @@ export default function ChoiceGeoCountries() {
     <br></br>
 
     {selected.includes('optional') && 
-      <CountryList></CountryList>
+      <CountryList countries={countries} setCountries={setCountries}></CountryList>
     }
     </>
   );

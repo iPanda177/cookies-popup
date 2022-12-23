@@ -1,10 +1,12 @@
 import {Stack, Tag, Autocomplete} from '@shopify/polaris';
 import {useState, useCallback, useMemo, useEffect} from 'react';
 
-export default function CountryList() {
+export default function CountryList({countries, setCountries}) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
+
+  setCountries(selectedOptions);
 
   const getCountries = async () => {
     let list = await fetch('https://restcountries.com/v3.1/all')
@@ -20,6 +22,8 @@ export default function CountryList() {
             label: country.flag + ' ' + country.name.common,
           })
         }
+
+        countries.sort((a, b) => a.value.localeCompare(b.value))
 
         return countries;
     });
@@ -91,6 +95,7 @@ export default function CountryList() {
   const textField = (
     <Autocomplete.TextField
       onChange={updateText}
+      prefferedPosition={'below'}
       label="Tags"
       value={inputValue}
       placeholder="Ukraine, Germany, Italy"
